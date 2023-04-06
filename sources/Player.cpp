@@ -8,9 +8,6 @@ using namespace std;
 
 namespace ariel
 {
-    vector<Card> myStack;
-    int numCardsWon;
-
     Player::Player(string name) : mName(name), numCardsWon(0), myStack()
     {
     }
@@ -35,7 +32,7 @@ namespace ariel
     {
         // Card currentTopCard = myStack.front();
         // myStack.erase(myStack.begin());
-
+        numCardsWon = 0;
         Card currentTopCard = myStack.back();
         myStack.pop_back();
         return currentTopCard;

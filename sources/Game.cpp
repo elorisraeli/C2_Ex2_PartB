@@ -5,23 +5,21 @@
 #include <string>
 #include "game.hpp"
 #include "player.hpp"
+#include "card.hpp"
 
 using namespace std;
 
 namespace ariel
 {
-
-    int turns;
-    int draws;
-    vector<string> log;
-
     Game::Game(Player player1, Player player2) : player1(player1), player2(player2)
     {
-        cout << "Player1 " + player1.getName() << endl;
-        cout << "Player2 " + player2.getName() << endl;
         turns = 0;
         draws = 0;
+        ShufflingCards();
+    }
 
+    void Game::ShufflingCards()
+    {
         bool even = true;
         for (int i = static_cast<int>(Card::Series::HEARTS); i <= static_cast<int>(Card::Series::SPADES); i++)
         {
@@ -31,19 +29,22 @@ namespace ariel
                 Card::Rank rank = static_cast<Card::Rank>(j);
                 Card card(series, rank);
 
+                // cout << "Card: Series=" + card.getSeries() + ", Rank=" + card.getRank() << endl;
+
                 if (even)
                 {
                     player1.addCardWon(card);
                     player1.decreaseNumOfCardsWon();
-                    cout << ("Player1 " + player1.getName() + ": stackSize=" + to_string(player1.stacksize()) + ", numCardWon=" + to_string(player1.cardesTaken())) << endl;
+                    // cout << ("Player1 " + player1.getName() + ": stackSize=" + to_string(player1.stacksize()) + ", numCardWon=" + to_string(player1.cardesTaken())) << endl;
                 }
                 else
                 {
                     player2.addCardWon(card);
                     player2.decreaseNumOfCardsWon();
-                    cout << ("Player2 " + player2.getName() + ": stackSize=" + to_string(player2.stacksize()) + ", numCardWon=" + to_string(player2.cardesTaken())) << endl;
+                    // cout << ("Player2 " + player2.getName() + ": stackSize=" + to_string(player2.stacksize()) + ", numCardWon=" + to_string(player2.cardesTaken())) << endl;
                 }
                 even = !even;
+                // cout << endl;
             }
         }
     }

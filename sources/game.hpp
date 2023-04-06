@@ -33,6 +33,7 @@ namespace ariel
         string getTurnsPlayedString();
 
         bool isWinner();
+        void ShufflingCards();
     };
 }
 #endif // GAME_HPP
