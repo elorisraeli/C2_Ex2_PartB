@@ -15,6 +15,8 @@ namespace ariel
         string mName;
         vector<Card> myStack;
         int numCardsWon;
+        int wins;
+        int loses;
 
     public:
         Player(string name);
@@ -25,6 +27,11 @@ namespace ariel
         void addCardWon(Card wonCards);
         string getName();
         void decreaseNumOfCardsWon();
+        int getWins();
+        int getloses();
+        void addWin();
+        void addLose();
+        int getNumCardsWon();
     };
 }
 #endif

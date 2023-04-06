@@ -11,6 +11,7 @@ using namespace std;
 
 namespace ariel
 {
+    
     Game::Game(Player player1, Player player2) : player1(player1), player2(player2)
     {
         turns = 0;
@@ -65,6 +66,7 @@ namespace ariel
 
     void Game::playTurn()
     {
+        turns++;
         vector<Card> turnCards;
 
         Card p1Card = player1.playCard();
@@ -84,6 +86,7 @@ namespace ariel
         while (draw == true)
         {
             turnString.append("Draw. ");
+            draws++;
             // first option out of cards
             if (player1.stacksize() == 0 || player2.stacksize() == 0)
             {
@@ -169,15 +172,25 @@ namespace ariel
         {
             playTurn();
         }
+        if (player1.stacksize() == 52)
+        {
+            player1.addWin();
+            player2.addLose();
+        }
+        else
+        {
+            player2.addWin();
+            player1.addLose();
+        }
     }
 
     void Game::printWiner()
     {
-        if (player1.stacksize() == 0)
+        if (player1.stacksize() == 52)
         {
             cout << player1.getName() << endl;
         }
-        else if (player2.stacksize() == 0)
+        else if (player2.stacksize() == 52)
         {
             cout << player2.getName() << endl;
         }
@@ -194,11 +207,18 @@ namespace ariel
         }
     }
 
-    // ------------------------------------------------------NEED TO FILL----------------------------------------------------------
+    /*
+    for each player prints basic statistics: win rate, cards won, <other stats you want to print>.
+    Also print the draw rate and amount of draws that happand.
+    (draw within a draw counts as 2 draws. )
+    */
     void Game::printStats()
     {
+        string p1String = "\nPlayer1: win rate=" + to_string(static_cast<double>(player1.getWins())/player1.getloses()) + ", cards won=" + to_string(player1.getNumCardsWon());
+        string p2String = "\nPlayer2: win rate=" + to_string(static_cast<double>(player2.getWins())/player2.getloses()) + ", cards won=" + to_string(player2.getNumCardsWon());
+        string drawsString = "\nDraws: draws=" + to_string(draws) + ", draw rate=" + to_string(static_cast<double>(draws)/(player1.getWins() + player1.getloses()));
+        cout << p1String + p2String + drawsString << endl;
     }
-    // ------------------------------------------------------NEED TO FILL----------------------------------------------------------
 
     string Game::getDrawsString()
     {
