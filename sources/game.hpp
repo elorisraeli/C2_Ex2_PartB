@@ -18,7 +18,7 @@ namespace ariel
         vector <string> log;
 
     public:
-        Game(Player player1, Player player2);
+        Game(Player& player1, Player& player2);
 
         void playTurn();
         void printLastTurn();
