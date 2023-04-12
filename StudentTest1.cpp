@@ -94,7 +94,7 @@ TEST_CASE("The game ends after at most 26 turns")
     Player p1("Alice");
     Player p2("Bob");
     Game game(p1, p2);
-    bool maxTurns = 26;
+    int maxTurns = 26;
     
     for (int i = 0 ; i < 26 && p1.stacksize()>0; i++ )
     {

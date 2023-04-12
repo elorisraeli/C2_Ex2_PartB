@@ -11,8 +11,8 @@ namespace ariel
     class Game
     {
     private:
-        Player player1;
-        Player player2;
+        Player& player_1;
+        Player& player_2;
         int turns;
         int draws;
         vector <string> log;
@@ -33,7 +33,6 @@ namespace ariel
         string getTurnsPlayedString();
 
         bool isWinner();
-        void ShufflingCards();
     };
 }
 #endif // GAME_HPP

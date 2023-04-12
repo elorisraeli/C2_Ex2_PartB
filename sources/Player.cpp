@@ -8,7 +8,7 @@ using namespace std;
 
 namespace ariel
 {
-    Player::Player(string name) : mName(name), numCardsWon(0), myStack(), wins(0), loses(0)
+    Player::Player(string name) : mName(name), myStack(), myCardsTaken(), cardsTaken(0), wins(0), loses(0)
     {
     }
 
@@ -19,33 +19,28 @@ namespace ariel
 
     int Player::cardesTaken()
     {
-        return numCardsWon;
+        return cardsTaken;
     }
 
     void Player::addCardWon(Card wonCard)
     {
-        myStack.push_back(wonCard);
-        numCardsWon++;
+        myCardsTaken.push_back(wonCard);
     }
 
     Card Player::playCard()
     {
-        // Card currentTopCard = myStack.front();
-        // myStack.erase(myStack.begin());
-        numCardsWon = 0;
-        Card currentTopCard = myStack.back();
-        myStack.pop_back();
+        if (myStack.size() == 0)
+        {
+            throw runtime_error("Cannot play card, stack is empty.");
+        }
+        Card currentTopCard = myStack.front();
+        myStack.erase(myStack.begin());
         return currentTopCard;
     }
 
     string Player::getName()
     {
         return mName;
-    }
-
-    void Player::decreaseNumOfCardsWon()
-    {
-        numCardsWon--;
     }
 
     int Player::getWins()
@@ -64,9 +59,27 @@ namespace ariel
     {
         loses++;
     }
-    int Player::getNumCardsWon()
+    void Player::increaseCardsTaken()
     {
-        return numCardsWon;
+        cardsTaken++;
+    }
+
+    void Player::endGame()
+    {
+        // clear the deck
+        myStack.clear();
+        // release any unused memory
+        myStack.shrink_to_fit();
+
+        // reset data
+        wins = 0;
+        loses = 0;
+        cardsTaken = 0;
+    }
+
+    void Player::getCard(Card card)
+    {
+        myStack.push_back(card);
     }
 
 }
