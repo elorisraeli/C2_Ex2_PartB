@@ -32,7 +32,7 @@ namespace ariel
         string getDrawsString();
         string getTurnsPlayedString();
 
-        bool isWinner();
+        bool isGameEnd();
     };
 }
 #endif // GAME_HPP

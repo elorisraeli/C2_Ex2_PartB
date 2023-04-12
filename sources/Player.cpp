@@ -8,7 +8,7 @@ using namespace std;
 
 namespace ariel
 {
-    Player::Player(string name) : mName(name), myStack(), myCardsTaken(), wins(0), loses(0)
+    Player::Player(string name) : mName(name), myStack(), cardsTaken(0), wins(0), loses(0)
     {
     }
 
@@ -19,23 +19,23 @@ namespace ariel
 
     int Player::cardesTaken()
     {
-        return myCardsTaken.size();
+        return cardsTaken;
     }
 
-    void Player::addCardWon(Card wonCard)
+    void Player::increaseCardsTaken()
     {
-        myCardsTaken.push_back(wonCard);
+        cardsTaken++;
     }
 
     Card Player::playCard()
     {
-        if (myStack.size() == 0)
+        if (myStack.size() != 0)
         {
-            throw runtime_error("Cannot play card, stack is empty.");
+            Card currentTopCard = myStack.front();
+            myStack.erase(myStack.begin());
+            return currentTopCard;
         }
-        Card currentTopCard = myStack.front();
-        myStack.erase(myStack.begin());
-        return currentTopCard;
+        throw runtime_error("Cannot play card, stack is empty.");
     }
 
     string Player::getName()
@@ -60,19 +60,7 @@ namespace ariel
         loses++;
     }
 
-    void Player::endGame()
-    {
-        // clear the deck
-        myStack.clear();
-        // release any unused memory
-        myStack.shrink_to_fit();
-
-        // reset data
-        wins = 0;
-        loses = 0;
-    }
-
-    void Player::getCard(Card card)
+    void Player::addCardToStack(Card card)
     {
         myStack.push_back(card);
     }
