@@ -17,7 +17,6 @@ namespace ariel
         vector<Card> myCardsTaken;
         int wins;
         int loses;
-        int cardsTaken;
 
     public:
         Player(string name);
@@ -31,7 +30,6 @@ namespace ariel
         int getloses();
         void addWin();
         void addLose();
-        void increaseCardsTaken();
         void endGame();
         void getCard(Card card);
     };

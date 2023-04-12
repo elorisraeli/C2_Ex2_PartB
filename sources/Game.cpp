@@ -158,7 +158,6 @@ namespace ariel
                     Card currentTopCard = turnCards.front();
                     turnCards.erase(turnCards.begin());
                     player_2.addCardWon(currentTopCard);
-                    player_2.increaseCardsTaken();
                 }
             }
             else
@@ -172,7 +171,6 @@ namespace ariel
                     Card currentTopCard = turnCards.front();
                     turnCards.erase(turnCards.begin());
                     player_1.addCardWon(currentTopCard);
-                    player_1.increaseCardsTaken();
                 }
             }
         }
@@ -189,7 +187,6 @@ namespace ariel
                     Card currentTopCard = turnCards.front();
                     turnCards.erase(turnCards.begin());
                     player_1.addCardWon(currentTopCard);
-                    player_1.increaseCardsTaken();
                 }
             }
             else
@@ -203,7 +200,6 @@ namespace ariel
                     Card currentTopCard = turnCards.front();
                     turnCards.erase(turnCards.begin());
                     player_2.addCardWon(currentTopCard);
-                    player_2.increaseCardsTaken();
                 }
             }
         }
@@ -217,12 +213,10 @@ namespace ariel
                 if (even)
                 {
                     player_1.addCardWon(currentTopCard);
-                    player_1.increaseCardsTaken();
                 }
                 else
                 {
                     player_2.addCardWon(currentTopCard);
-                    player_2.increaseCardsTaken();
                 }
                 even = !even;
             }

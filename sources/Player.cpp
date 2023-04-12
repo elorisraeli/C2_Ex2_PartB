@@ -8,7 +8,7 @@ using namespace std;
 
 namespace ariel
 {
-    Player::Player(string name) : mName(name), myStack(), myCardsTaken(), cardsTaken(0), wins(0), loses(0)
+    Player::Player(string name) : mName(name), myStack(), myCardsTaken(), wins(0), loses(0)
     {
     }
 
@@ -19,7 +19,7 @@ namespace ariel
 
     int Player::cardesTaken()
     {
-        return cardsTaken;
+        return myCardsTaken.size();
     }
 
     void Player::addCardWon(Card wonCard)
@@ -59,10 +59,6 @@ namespace ariel
     {
         loses++;
     }
-    void Player::increaseCardsTaken()
-    {
-        cardsTaken++;
-    }
 
     void Player::endGame()
     {
@@ -74,7 +70,6 @@ namespace ariel
         // reset data
         wins = 0;
         loses = 0;
-        cardsTaken = 0;
     }
 
     void Player::getCard(Card card)
